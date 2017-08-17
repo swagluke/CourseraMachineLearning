@@ -15,7 +15,13 @@ p = zeros(m, 1);
 %               You should set p to a vector of 0's and 1's
 %
 
-
+h = sigmoid(X*theta);
+for k=1:m
+if h(k)>=0.5;
+	p(k)=1;
+else
+	p(k)=0;
+end
 
 
 
