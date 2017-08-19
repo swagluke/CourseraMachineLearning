@@ -21,6 +21,15 @@ p = zeros(size(X, 1), 1);
 %       can use max(A, [], 2) to obtain the max for each row.
 %
 
+% Layer 1 a^1
+inputlayer = [ones(m,1),X];
+% Layer 2 a^2
+z = sigmoid(inputlayer*Theta1');
+hiddenlayer = [ones(m,1),z];
+% Layer 3 a^3  aka Hypothese 
+outputlayer = sigmoid(hiddenlayer*Theta2');
+
+[m,p] = max (outputlayer,[],2);
 
 
 

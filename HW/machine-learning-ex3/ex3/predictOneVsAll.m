@@ -28,10 +28,13 @@ X = [ones(m, 1) X];
 %       max element, for more information see 'help max'. If your examples 
 %       are in rows, then, you can use max(A, [], 2) to obtain the max 
 %       for each row.
-%       
+%   
 
-
-
+% Coverts to matrix of 5000 examples vs. num_lables (each sample has
+% num_labels of corresponding prob)
+% Sigmoid function converts to p between 0 to 1
+h = sigmoid(X*all_theta');
+[m, p] = max(h, [], 2);
 
 
 
