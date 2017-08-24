@@ -62,19 +62,45 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+% Part 1 Feedforward the neural network and return the cost in the variable J.
 
+% Create a1 which is 5000 * 201 matrix
+a1 = [ones(size(X,1),1),X]; %5000 * 201
+z2 = a1 * Theta1'; %5000 * 25
+a2 = sigmoid(z2); %5000 * 25
+a2 = [ones(size(a2,1),1),a2]; % 5000 * 26
+a3 = sigmoid(a2 * Theta2'); % 5000 * 10
+m = size(X,1); %5000
+K = size(a3, 2); %10
+y1 = zeros(m, K);
+one = ones(m, K);
+for k = 1:K
+    y1(:,k) = y == k;
+end
+% Cost Function for Neural Network without Regularization
+J = sum(sum(-y1.*log(a3)-(one-y1).*log(one-a3)));
+J = J / m;
+theta1 = Theta1(:,2:size(Theta1,2));%25*400
+theta2 = Theta2(:,2:size(Theta2,2)); %10*25
+% Cost Function for Neural Network with Regularization
+J = J + lambda / 2 / m * (sum(sum(theta1.^2))+ sum(sum(theta2.^2)));
 
+% Calculate Error Term
+error3 = a3 - y1; %5000 * 10
+error2 = error3*theta2.*sigmoidGradient(z2); %5000 * 25
 
+% Part 2: Using backpropagation
+% Unroll gradient
+Theta1_grad = Theta1_grad + error2'*a1; %25*401
+Theta1_grad = Theta1_grad / m;
+Theta2_grad = Theta2_grad + error3'*a2; %10*26
+Theta2_grad = Theta2_grad / m;
+theta1 = [zeros(size(theta1,1),1),theta1];
+theta2 = [zeros(size(theta2,1),1),theta2];
 
-
-
-
-
-
-
-
-
-
+% Part 3: regularization
+Theta1_grad = Theta1_grad + lambda / m * theta1;
+Theta2_grad = Theta2_grad + lambda / m * theta2;
 
 
 
