@@ -20,7 +20,9 @@ S = zeros(n);
 %       number of examples).
 %
 
-
+Sigma = 1/m*X' * X;
+%svd(A) returns the singular values of matrix A in descending order.
+[U,S,V]=svd(Sigma); 
 
 
 
