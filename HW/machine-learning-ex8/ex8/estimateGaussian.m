@@ -21,6 +21,19 @@ sigma2 = zeros(n, 1);
 %               should contain variance of the i-th feature.
 %
 
+% M = mean(A) returns the mean of the elements of A along the first 
+% array dimension whose size does not equal 1.
+% If A is a vector, then mean(A) returns the mean of the elements.
+% If A is a matrix, then mean(A) returns a row vector containing the mean of each column.
+
+mu = mean(X);
+% V = var(A,w) specifies a weighting scheme. 
+% When w = 0 (default), V is normalized by the 
+% number of observations-1. When w = 1, it is normalized 
+% by the number of observations. w can also be a weight vector 
+% containing nonnegative elements. In this case, the length of 
+% w must equal the length of the dimension over which var is operating.
+sigma2 = var(X,1);
 
 
 
